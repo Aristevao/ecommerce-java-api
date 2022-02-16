@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class ProductRes {
+public class ProductResponse {
 
     private String id;
 
@@ -22,5 +22,4 @@ public class ProductRes {
     private BigDecimal price;
 
     private String supplier;
-
 }
