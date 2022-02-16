@@ -7,4 +7,6 @@ import java.util.List;
 public interface FindProductUserCase {
 
     List<Product> findAll();
+
+    Product findById(final Integer id);
 }

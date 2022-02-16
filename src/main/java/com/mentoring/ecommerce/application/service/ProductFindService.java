@@ -19,4 +19,9 @@ public class ProductFindService implements FindProductUserCase {
     public List<Product> findAll() {
         return port.findAll();
     }
+
+    @Override
+    public Product findById(final Integer id) {
+        return null;
+    }
 }
