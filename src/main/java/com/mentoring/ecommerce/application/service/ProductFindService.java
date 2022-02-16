@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
@@ -22,7 +21,7 @@ public class ProductFindService implements FindProductUserCase {
     }
 
     @Override
-    public Optional<Product> findById(final Integer id) {
+    public Product findById(final Integer id) {
         return port.findById(id);
     }
 }

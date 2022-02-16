@@ -6,7 +6,6 @@ import com.mentoring.ecommerce.adapter.in.web.response.ProductRes;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +30,11 @@ public class ProductController {
         return ResponseEntity.ok().body(findUseCase.findAll().stream()
                 .map(product -> productMapper.toResponse(product))
                 .toList());
+    }
+
+    @GetMapping("{id}")
+    public ResponseEntity<ProductRes> findProductById(final Integer id) {
+        return ResponseEntity.ok().body(productMapper.toResponse(findUseCase.findById(id)));
     }
 
     @PutMapping("{id}")
