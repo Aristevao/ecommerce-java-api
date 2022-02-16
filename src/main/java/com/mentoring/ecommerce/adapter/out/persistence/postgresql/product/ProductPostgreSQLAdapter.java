@@ -5,12 +5,13 @@ import com.mentoring.ecommerce.application.port.out.FindProductPort;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
-// @PersistenceAdaper
+@Component
 public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPort {
 
     ProductPostgreSQLRepository repository;

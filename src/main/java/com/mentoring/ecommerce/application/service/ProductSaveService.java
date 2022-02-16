@@ -5,10 +5,10 @@ import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 @RequiredArgsConstructor
-@Component
+@Service
 public class ProductSaveService implements SaveProductUseCase {
 
     private SaveProductPort getProduct;

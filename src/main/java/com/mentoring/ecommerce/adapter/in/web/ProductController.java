@@ -1,8 +1,8 @@
 package com.mentoring.ecommerce.adapter.in.web;
 
 import com.mentoring.ecommerce.adapter.in.web.mapper.ProductMapper;
-import com.mentoring.ecommerce.adapter.in.web.request.ProductReq;
-import com.mentoring.ecommerce.adapter.in.web.response.ProductRes;
+import com.mentoring.ecommerce.adapter.in.web.request.ProductRequest;
+import com.mentoring.ecommerce.adapter.in.web.response.ProductResponse;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
@@ -21,24 +21,24 @@ public class ProductController {
     private ProductMapper productMapper;
 
     @PostMapping
-    public void saveProduct(final ProductReq request) {
+    public void saveProduct(final ProductRequest request) {
         saveUseCase.saveProduct(productMapper.toDomain(request));
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductRes>> findAllProducts() {
+    public ResponseEntity<List<ProductResponse>> findAllProducts() {
         return ResponseEntity.ok().body(findUseCase.findAll().stream()
                 .map(product -> productMapper.toResponse(product))
                 .toList());
     }
 
     @GetMapping("{id}")
-    public ResponseEntity<ProductRes> findProductById(final Integer id) {
+    public ResponseEntity<ProductResponse> findProductById(final Integer id) {
         return ResponseEntity.ok().body(productMapper.toResponse(findUseCase.findById(id)));
     }
 
     @PutMapping("{id}")
-    public void updateProduct(final ProductReq request, final Integer id) {
+    public void updateProduct(final ProductRequest request, final Integer id) {
         updateUseCase.updateProduct(productMapper.toDomain(request), id);
     }
 }
