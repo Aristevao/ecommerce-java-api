@@ -1,16 +1,12 @@
-package com.mentoring.ecommerce.adapter.in.web.response;
+package com.mentoring.ecommerce.adapter.in.web.request;
 
 import com.sun.istack.internal.NotNull;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 
 @Data
-@NoArgsConstructor
-public class ProductRes {
-
-    private String id;
+public class ProductRequest {
 
     @NotNull
     private String name;
