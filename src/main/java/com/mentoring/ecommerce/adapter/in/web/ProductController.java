@@ -1,8 +1,8 @@
 package com.mentoring.ecommerce.adapter.in.web;
 
 import com.mentoring.ecommerce.adapter.in.web.mapper.ProductMapper;
-import com.mentoring.ecommerce.adapter.in.web.request.ProductReq;
-import com.mentoring.ecommerce.adapter.in.web.response.ProductRes;
+import com.mentoring.ecommerce.adapter.in.web.request.ProductRequest;
+import com.mentoring.ecommerce.adapter.in.web.response.ProductResponse;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class ProductController {
     private ProductMapper productMapper;
 
     @PostMapping()
-    public void saveProduct(ProductReq request) {
+    public void saveProduct(ProductRequest request) {
         saveUseCase.saveProduct(productMapper.toDomain(request));
     }
 
     @GetMapping()
-    public ResponseEntity<List<ProductRes>> findAllProducts() {
+    public ResponseEntity<List<ProductResponse>> findAllProducts() {
         return ResponseEntity.ok().body(findUseCase.findAll().stream()
                 .map(product -> productMapper.toResponse(product))
                 .toList());

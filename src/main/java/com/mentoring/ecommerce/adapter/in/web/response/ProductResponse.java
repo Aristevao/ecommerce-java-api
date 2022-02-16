@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.adapter.in.web.request;
+package com.mentoring.ecommerce.adapter.in.web.response;
 
 import com.sun.istack.internal.NotNull;
 import lombok.Data;
@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 
 @Data
 @NoArgsConstructor
-public class ProductReq {
+public class ProductResponse {
 
     private String id;
 
@@ -22,5 +22,4 @@ public class ProductReq {
     private BigDecimal price;
 
     private String supplier;
-
 }
