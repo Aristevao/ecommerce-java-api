@@ -7,6 +7,7 @@ import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
+import java.util.Optional;
 
 @RequiredArgsConstructor
 // @PersistenceAdaper
@@ -16,6 +17,10 @@ public class ProductPostgreSQLAdapter implements FindProductPort, UpdateProductP
 
     @Override public List<Product> findAll() {
         return (List<Product>) repository.findAll();
+    }
+
+    @Override public Optional<Product> findById(Integer id) {
+        return repository.findById(id);
     }
 
     @Override public void saveProduct(final Product product) {

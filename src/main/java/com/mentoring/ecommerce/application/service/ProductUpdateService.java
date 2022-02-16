@@ -7,6 +7,8 @@ import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Component
 public class ProductUpdateService implements UpdateProductUserCase {
@@ -19,10 +21,8 @@ public class ProductUpdateService implements UpdateProductUserCase {
 
     @Override
     public void updateProduct(final Product product, final Integer id) {
-        final Product oldProduct = productFindService.findById(id);
-        if (oldProduct == null) {
-            throw new ProductNotFoundException();
-        }
+        final Optional<Product> oldProduct = productFindService.findById(id);
+        oldProduct.orElseThrow(ProductNotFoundException::new);
         product.setId(id);
         productSaveService.saveProduct(product);
     }
