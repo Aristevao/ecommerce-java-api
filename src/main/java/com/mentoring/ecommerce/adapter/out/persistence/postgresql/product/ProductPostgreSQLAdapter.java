@@ -18,8 +18,8 @@ public class ProductPostgreSQLAdapter implements FindProductPort, UpdateProductP
         return (List<Product>) repository.findAll();
     }
 
-    @Override public Product saveProduct(final Product product) {
-        return repository.save(product);
+    @Override public void saveProduct(final Product product) {
+        repository.save(product);
     }
 
     @Override public Product updateProduct(final Product product, final Integer id) {

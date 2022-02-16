@@ -24,5 +24,4 @@ public class ProductReq {
 
     @NotBlank
     private String supplier;
-
 }

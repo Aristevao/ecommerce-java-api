@@ -4,7 +4,7 @@ import com.mentoring.ecommerce.domain.Product;
 
 public interface SaveProductUseCase {
 
-    Product saveProduct(final Product product);
+    void saveProduct(final Product product);
 
 
 }
