@@ -6,6 +6,7 @@ import com.mentoring.ecommerce.adapter.in.web.response.ProductResponse;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class ProductController {
 
     private SaveProductUseCase saveUseCase;
+
+    @Autowired
     private FindProductUserCase findUseCase;
     private UpdateProductUserCase updateUseCase;
     private ProductMapper productMapper;

@@ -1,7 +1,9 @@
 package com.mentoring.ecommerce.adapter.out.persistence.postgresql.product;
 
 import com.mentoring.ecommerce.domain.Product;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface ProductPostgreSQLRepository extends CrudRepository<Product, Integer> {
+@Repository
+public interface ProductPostgreSQLRepository extends JpaRepository<Product, Integer> {
 }
