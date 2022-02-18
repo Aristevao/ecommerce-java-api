@@ -1,6 +1,7 @@
 package com.mentoring.ecommerce.adapter.out.persistence.postgresql.product;
 
 import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
 import com.mentoring.ecommerce.application.port.out.FindProductPort;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
@@ -13,7 +14,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPort {
+public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPort, DeleteProductPort {
 
     @Autowired
     ProductPostgreSQLRepository repository;
@@ -24,7 +25,7 @@ public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPor
     }
 
     @Override
-    public Product findById(Integer id) {
+    public Product findById(final Integer id) {
         Optional<Product> product = repository.findById(id);
         product.orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
         return product.get();
@@ -33,5 +34,10 @@ public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPor
     @Override
     public void saveProduct(final Product product) {
         repository.save(product);
+    }
+
+    @Override
+    public void deleteProduct(final Integer id) {
+        repository.deleteById(id);
     }
 }
