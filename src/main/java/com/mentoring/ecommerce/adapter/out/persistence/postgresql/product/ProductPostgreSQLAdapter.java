@@ -25,10 +25,8 @@ public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPor
     }
 
     @Override
-    public Product findById(final Integer id) {
-        Optional<Product> product = repository.findById(id);
-        product.orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
-        return product.get();
+    public Optional<Product> findById(final Integer id) {
+        return repository.findById(id);
     }
 
     @Override
