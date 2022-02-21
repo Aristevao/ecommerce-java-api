@@ -1,14 +1,10 @@
 package com.mentoring.ecommerce.domain;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-//@Data
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+//@Data TODO find out why isn't working (request, response, entity)
 public class Product {
 
     @Id
