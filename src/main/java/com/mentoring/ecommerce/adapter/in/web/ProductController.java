@@ -5,11 +5,9 @@ import com.mentoring.ecommerce.adapter.in.web.request.ProductRequest;
 import com.mentoring.ecommerce.adapter.in.web.response.ProductResponse;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
+import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,10 +17,11 @@ public class ProductController {
 
     private SaveProductUseCase saveUseCase;
     private FindProductUserCase findUseCase;
+    private UpdateProductUserCase updateUseCase;
     private ProductMapper productMapper;
 
     @PostMapping()
-    public void saveProduct(ProductRequest request) {
+    public void saveProduct(final ProductRequest request) {
         saveUseCase.saveProduct(productMapper.toDomain(request));
     }
 
@@ -31,5 +30,10 @@ public class ProductController {
         return ResponseEntity.ok().body(findUseCase.findAll().stream()
                 .map(product -> productMapper.toResponse(product))
                 .toList());
+    }
+
+    @PutMapping("{id}")
+    public void updateProduct(final ProductRequest request, final Integer id) {
+        updateUseCase.updateProduct(productMapper.toDomain(request), id);
     }
 }

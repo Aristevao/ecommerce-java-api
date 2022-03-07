@@ -13,7 +13,7 @@ public class ProductSaveService implements SaveProductUseCase {
 
     private SaveProductPort getProduct;
 
-    @Override public Product saveProduct(final Product product) {
-        return getProduct.saveProduct(product);
+    @Override public void saveProduct(final Product product) {
+        getProduct.saveProduct(product);
     }
 }
