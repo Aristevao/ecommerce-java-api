@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.service;
+package com.mentoring.ecommerce.application.service.product;
 
 
 import com.mentoring.common.exceptions.ProductNotFoundException;

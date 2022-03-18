@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.service;
+package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
 import com.mentoring.ecommerce.domain.Product;
