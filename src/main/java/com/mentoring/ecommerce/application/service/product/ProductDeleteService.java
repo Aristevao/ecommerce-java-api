@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.service;
+package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.ecommerce.application.port.in.DeleteProductUserCase;
 import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class DeleteUpdateService implements DeleteProductUserCase {
+public class ProductDeleteService implements DeleteProductUserCase {
 
     @Autowired
     ProductFindService productFindService;
