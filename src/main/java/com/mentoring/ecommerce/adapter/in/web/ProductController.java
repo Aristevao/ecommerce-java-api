@@ -7,6 +7,8 @@ import com.mentoring.ecommerce.application.port.in.DeleteProductUserCase;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,22 +19,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/products")
+@RequiredArgsConstructor
 public class ProductController {
 
-    @Autowired
-    private SaveProductUseCase saveUseCase;
+    private final SaveProductUseCase saveUseCase;
 
-    @Autowired
-    private FindProductUserCase findUseCase;
+    private final FindProductUserCase findUseCase;
 
-    @Autowired
-    private UpdateProductUserCase updateUseCase;
+    private final UpdateProductUserCase updateUseCase;
 
-    @Autowired
-    private DeleteProductUserCase deleteUseCase;
+    private final DeleteProductUserCase deleteUseCase;
 
-    @Autowired
-    private ProductMapper productMapper;
+    private final ProductMapper productMapper;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
@@ -43,7 +41,7 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<ProductResponse>> findAllProducts() {
         return ResponseEntity.ok().body(findUseCase.findAll().stream()
-                .map(product -> productMapper.toResponse(product))
+                .map(productMapper::toResponse)
                 .toList());
     }
 
