@@ -54,17 +54,6 @@ public class ProductController {
                 .collect(Collectors.toList());
     }
 
-//    HateOAS with CollectionModel class
-//    @GetMapping
-//    CollectionModel<EntityModel<ProductResponse>> findAllProducts() {
-//        List<EntityModel<ProductResponse>> employees = findUseCase.findAll().stream()
-//                .map(productMapper::toResponse)
-//                .map(product -> EntityModel.of(product,
-//                        linkTo(methodOn(ProductController.class).findProductById(product.getId())).withSelfRel()))
-//                .collect(Collectors.toList());
-//        return CollectionModel.of(employees, linkTo(methodOn(ProductController.class).findAllProducts()).withSelfRel());
-//    }
-
     @GetMapping("{productId}")
     public ProductResponse findProductById(@PathVariable(name = "productId") final Integer id) {
         return productMapper.toResponse(findUseCase.findById(id))
