@@ -27,8 +27,8 @@ public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPor
     }
 
     @Override
-    public void saveProduct(final Product product) {
-        repository.save(product);
+    public Product saveProduct(final Product product) {
+        return repository.save(product);
     }
 
     @Override
