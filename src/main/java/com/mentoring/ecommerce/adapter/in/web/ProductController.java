@@ -9,7 +9,7 @@ import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,18 +18,13 @@ import java.util.stream.Collectors;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
 public class ProductController {
-    /*
-     * TODO
-     *   Save returns ProductResponse OK
-     *   Update returns ProductResponse OK
-     *   Maybe: delete returns selfLink
-     *   FindById invokes Update and Delete links
-     * */
 
     private final SaveProductUseCase saveUseCase;
 
@@ -42,7 +37,7 @@ public class ProductController {
     private final ProductMapper productMapper;
 
     @PostMapping()
-    @ResponseStatus(HttpStatus.CREATED)
+    @ResponseStatus(CREATED)
     public ProductResponse saveProduct(@Valid @RequestBody final ProductRequest request) {
         Product product = saveUseCase.saveProduct(productMapper.toDomain(request));
         return productMapper.toResponse(product)
@@ -75,7 +70,7 @@ public class ProductController {
         return productMapper.toResponse(findUseCase.findById(id))
                 .add(linkTo(ProductController.class).slash(id).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findProductById(id)).withRel("update"))
-                .add(linkTo(methodOn(ProductController.class).findProductById(id)).withRel("delete"))
+                .add(linkTo(methodOn(ProductController.class).deleteProduct(id)).withRel("delete"))
                 .add(linkTo(methodOn(ProductController.class).findAllProducts()).withRel("products"));
     }
 
@@ -90,8 +85,9 @@ public class ProductController {
     }
 
     @DeleteMapping("{productId}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteProduct(@PathVariable(name = "productId") Integer id) {
+    @ResponseStatus(NO_CONTENT)
+    ResponseEntity<?> deleteProduct(@PathVariable(name = "productId") Integer id) {
         deleteUseCase.deleteProduct(id);
+        return ResponseEntity.noContent().build();
     }
 }
