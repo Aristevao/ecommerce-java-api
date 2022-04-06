@@ -9,11 +9,14 @@ import com.mentoring.ecommerce.application.port.in.SaveProductUseCase;
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 @RequestMapping("/api/products")
@@ -37,15 +40,32 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<List<ProductResponse>> findAllProducts() {
-        return ResponseEntity.ok().body(findUseCase.findAll().stream()
+    public List<ProductResponse> findAllProducts() {
+        return findUseCase.findAll().stream()
                 .map(productMapper::toResponse)
-                .toList());
+                .map(product -> product.add(linkTo(
+                        methodOn(ProductController.class).findProductById(product.getId())).withSelfRel()))
+                .collect(Collectors.toList());
     }
 
+//    HateOAS with CollectionModel class
+//    @GetMapping
+//    CollectionModel<EntityModel<ProductResponse>> findAllProducts() {
+//        List<EntityModel<ProductResponse>> employees = findUseCase.findAll().stream()
+//                .map(productMapper::toResponse)
+//                .map(product -> EntityModel.of(product,
+//                        linkTo(methodOn(ProductController.class).findProductById(product.getId())).withSelfRel()))
+//                .collect(Collectors.toList());
+//        return CollectionModel.of(employees, linkTo(methodOn(ProductController.class).findAllProducts()).withSelfRel());
+//    }
+
     @GetMapping("{productId}")
-    public ResponseEntity<ProductResponse> findProductById(@PathVariable(name = "productId") final Integer id) {
-        return ResponseEntity.ok().body(productMapper.toResponse(findUseCase.findById(id)));
+    public ProductResponse findProductById(@PathVariable(name = "productId") final Integer id) {
+        return productMapper.toResponse(findUseCase.findById(id))
+                .add(linkTo(ProductController.class).slash(id).withSelfRel())
+                .add(linkTo(methodOn(ProductController.class).findProductById(id)).withRel("updateProduct"))
+                .add(linkTo(methodOn(ProductController.class).findProductById(id)).withRel("deleteProduct"))
+                .add(linkTo(methodOn(ProductController.class).findAllProducts()).withRel("allProducts"));
     }
 
     @PutMapping("{productId}")
