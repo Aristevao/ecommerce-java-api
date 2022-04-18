@@ -1,13 +1,11 @@
 package com.mentoring.ecommerce.adapter.out.persistence.postgresql.product;
 
 import com.mentoring.common.annotaion.PersistenceAdapter;
-import com.mentoring.common.exceptions.ProductNotFoundException;
 import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
 import com.mentoring.ecommerce.application.port.out.FindProductPort;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,8 +14,7 @@ import java.util.Optional;
 @PersistenceAdapter
 public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPort, DeleteProductPort {
 
-    @Autowired
-    ProductPostgreSQLRepository repository;
+    private final ProductPostgreSQLRepository repository;
 
     @Override
     public List<Product> findAll() {

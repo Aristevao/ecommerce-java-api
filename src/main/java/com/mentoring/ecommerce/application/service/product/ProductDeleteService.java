@@ -3,18 +3,15 @@ package com.mentoring.ecommerce.application.service.product;
 import com.mentoring.ecommerce.application.port.in.DeleteProductUserCase;
 import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
 public class ProductDeleteService implements DeleteProductUserCase {
 
-    @Autowired
-    ProductFindService productFindService;
+    private final ProductFindService productFindService;
 
-    @Autowired
-    DeleteProductPort port;
+    private final DeleteProductPort port;
 
     @Override
     public void deleteProduct(final Integer id) {
