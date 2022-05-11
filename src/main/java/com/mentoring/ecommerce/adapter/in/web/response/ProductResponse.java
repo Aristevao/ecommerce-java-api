@@ -21,4 +21,6 @@ public class ProductResponse extends RepresentationModel<ProductResponse> {
     private BigDecimal price;
 
     private String supplier;
+
+    private String path;
 }

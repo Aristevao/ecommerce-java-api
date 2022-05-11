@@ -75,7 +75,7 @@ public class ProductController {
 
     @DeleteMapping("{productId}")
     @ResponseStatus(NO_CONTENT)
-    ResponseEntity<?> deleteProduct(@PathVariable(name = "productId") Integer id) {
+    ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") Integer id) {
         deleteUseCase.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }

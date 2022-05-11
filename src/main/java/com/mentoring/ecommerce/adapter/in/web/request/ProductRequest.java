@@ -13,8 +13,8 @@ import java.math.BigDecimal;
 @Builder
 public class ProductRequest {
 
-    @NotNull
-    @NotBlank
+    @NotNull(message = "A name must be provided")
+    @NotBlank(message = "Name cannot be blank")
     private String name;
 
     private String description;
@@ -26,4 +26,6 @@ public class ProductRequest {
     @NotNull
     @NotBlank
     private String supplier;
+
+    private String path;
 }

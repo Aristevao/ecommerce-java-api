@@ -24,4 +24,7 @@ public class Product {
 
     @Column
     private String supplier;
+
+    @Column
+    private String path;
 }
