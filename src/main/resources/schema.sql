@@ -4,5 +4,6 @@ CREATE TABLE product (
     description VARCHAR(128),
     price float,
     supplier VARCHAR(128),
+    path VARCHAR(255),
     PRIMARY KEY (id)
 );
