@@ -18,8 +18,8 @@ import java.util.stream.Collectors;
 public class S3Configuration {
 
     // TODO Tentar usar código abaixo para S3Configuration para tentar evitar erro de @bean nessa classe Adapter (em branch separada)
-    private static String AWS_ACCESS_KEY = "AKIAR6KAAIAQDN2MGXUQ";
-    private static String AWS_SECRET_KEY = "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";
+    private static String AWS_ACCESS_KEY = "access-key";
+    private static String AWS_SECRET_KEY = "access-key";
 
 //    @Value("${aws-access-key}")
 //    private String AWS_ACCESS_KEY;
