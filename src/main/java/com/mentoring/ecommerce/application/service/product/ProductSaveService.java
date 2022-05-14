@@ -29,9 +29,9 @@ public class ProductSaveService implements SaveProductUseCase {
         String fullPath = null;
         if (product.getPath() != null) {
             byte[] photo = decodeBase64(product.getPath());
-            InputStream fis = new ByteArrayInputStream(photo);
-            String filePath = "product-photos";
-            String fileName = String.valueOf(UUID.randomUUID());
+            final InputStream fis = new ByteArrayInputStream(photo);
+            final String filePath = "product-photos";
+            final String fileName = String.valueOf(UUID.randomUUID());
             uploadPort.upload(filePath, fis, fileName);
             fullPath = bucketName.concat("/").concat(filePath).concat("/").concat(fileName);
         }

@@ -38,7 +38,7 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ProductResponse saveProduct(@Valid @RequestBody final ProductRequest request) {
+    public ProductResponse saveProduct(@RequestBody final ProductRequest request) {
         Product product = saveUseCase.saveProduct(productMapper.toDomain(request));
         return productMapper.toResponse(product)
                 .add(linkTo(methodOn(ProductController.class).findProductById(product.getId())).withSelfRel())
