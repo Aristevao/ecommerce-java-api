@@ -36,7 +36,7 @@ public class ProductController {
 
     private final ProductMapper productMapper;
 
-    @PostMapping()
+    @PostMapping
     @ResponseStatus(CREATED)
     public ProductResponse saveProduct(@Valid @RequestBody final ProductRequest request) {
         Product product = saveUseCase.saveProduct(productMapper.toDomain(request));
