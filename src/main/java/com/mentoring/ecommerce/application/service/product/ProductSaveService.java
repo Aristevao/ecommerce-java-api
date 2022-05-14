@@ -6,10 +6,12 @@ import com.mentoring.ecommerce.application.port.out.S3HandlerPort;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.UUID;
 
 import static org.apache.commons.codec.binary.Base64.decodeBase64;
 
@@ -17,20 +19,23 @@ import static org.apache.commons.codec.binary.Base64.decodeBase64;
 @Service
 public class ProductSaveService implements SaveProductUseCase {
 
-    private final SaveProductPort savePort;
     private final S3HandlerPort uploadPort;
+    private final SaveProductPort savePort;
+    @Value("${s3.bucket-name}")
+    private String bucketName;
 
     @Override
     public Product saveProduct(final Product product) {
-         if (product.getPath() != null) {
+        String fullPath = null;
+        if (product.getPath() != null) {
             byte[] photo = decodeBase64(product.getPath());
             InputStream fis = new ByteArrayInputStream(photo);
-            uploadPort.upload("product-photos", fis, "product_photo_".concat(product.getName())); // TODO Dynamize path and fileName
+            String filePath = "product-photos";
+            String fileName = String.valueOf(UUID.randomUUID());
+            uploadPort.upload(filePath, fis, fileName);
+            fullPath = bucketName.concat("/").concat(filePath).concat("/").concat(fileName);
         }
-//         product.setPath(path) // TODO Learn how to get object path to save in the database
-
-
-        product.setPath(null);
+        product.setPath(fullPath);
         return savePort.saveProduct(product);
     }
 }
