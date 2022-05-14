@@ -5,7 +5,6 @@ import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.util.IOUtils;
 import com.mentoring.ecommerce.application.port.out.S3HandlerPort;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -17,14 +16,12 @@ import java.util.stream.Collectors;
 import static com.mentoring.configuration.S3Configuration.amazonS3Client;
 
 @Component
-@Slf4j
 public class AmazonS3Adapter implements S3HandlerPort {
 
     @Value("${s3.bucket-name}")
     private String bucketName;
 
     public List<String> listBuckets() {
-        log.info("List buckets");
         return amazonS3Client().listBuckets()
                 .stream()
                 .map(Bucket::getName)
@@ -40,7 +37,6 @@ public class AmazonS3Adapter implements S3HandlerPort {
     @SneakyThrows
     public void upload(final String path, final byte[] bytes, final String fileName) {
         final String fullPath = bucketName.concat("/").concat(path);
-        log.info("Uploading file {} to S3 bucket {}", fileName, fullPath);
 
         final ObjectMetadata metadata = new ObjectMetadata();
         metadata.setContentLength(bytes.length);

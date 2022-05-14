@@ -28,7 +28,8 @@ public class ProductSaveService implements SaveProductUseCase {
             uploadPort.upload("product-photos", fis, "product_photo_".concat(product.getName())); // TODO Dynamize path and fileName
         }
 //         product.setPath(path) // TODO Learn how to get object path to save in the database
-        uploadPort.listBuckets().forEach(System.out::println); // Method to test AWS connection
+
+
         product.setPath(null);
         return savePort.saveProduct(product);
     }
