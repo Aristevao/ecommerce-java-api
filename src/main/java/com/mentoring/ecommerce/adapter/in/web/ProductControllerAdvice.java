@@ -26,12 +26,12 @@ public class ProductControllerAdvice {
         return new ResponseEntity<>(error, NOT_FOUND);
     }
 
-    @ExceptionHandler({MethodArgumentNotValidException.class, MissingServletRequestParameterException.class, HttpMessageNotReadableException.class})
+    @ExceptionHandler({MissingServletRequestParameterException.class, HttpMessageNotReadableException.class})
     public ResponseEntity<ErrorEntity> handleBadRequestException(
             final RuntimeException exception, final WebRequest request) {
 
         final ErrorEntity error = new ErrorEntity(BAD_REQUEST.value(), exception.getMessage(),
-                exception.getCause().getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI());
+                exception.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI());
         return new ResponseEntity<>(error, BAD_REQUEST);
     }
 }

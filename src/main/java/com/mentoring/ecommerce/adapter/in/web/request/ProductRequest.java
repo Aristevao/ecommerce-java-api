@@ -19,8 +19,8 @@ public class ProductRequest {
 
     private String description;
 
-    @Min(value = 0)
-    @Max(value = 9999999)
+    @Min(value = 0, message = "Price cannot be a negative value")
+    @Max(value = 9999999, message = "Price must be less than 9999999")
     private BigDecimal price;
 
     @NotNull
