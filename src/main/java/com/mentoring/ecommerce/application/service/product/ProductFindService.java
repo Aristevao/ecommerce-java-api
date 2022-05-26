@@ -2,13 +2,15 @@ package com.mentoring.ecommerce.application.service.product;
 
 
 import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.out.FindProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -18,8 +20,8 @@ public class ProductFindService implements FindProductUserCase {
     private final FindProductPort port;
 
     @Override
-    public List<Product> findAll() {
-        return port.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return port.findAll(new PageBuilder().setPage(pageable.getPageNumber()).build());
     }
 
     @Override
