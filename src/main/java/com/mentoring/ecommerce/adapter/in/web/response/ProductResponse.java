@@ -1,25 +1,21 @@
 package com.mentoring.ecommerce.adapter.in.web.response;
 
-import com.sun.istack.internal.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.springframework.hateoas.RepresentationModel;
 
 import java.math.BigDecimal;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 @NoArgsConstructor
-public class ProductResponse {
+public class ProductResponse extends RepresentationModel<ProductResponse> {
 
-    private String id;
-
-    @NotNull
+    private Integer id;
     private String name;
-
-    @NotNull
     private String description;
-
-    @NotNull
     private BigDecimal price;
-
     private String supplier;
+    private String path;
 }
