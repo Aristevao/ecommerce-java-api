@@ -26,7 +26,7 @@ public class ProductControllerAdvice extends ResponseEntityExceptionHandler {
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         logger.info(ex.getClass().getName());
-        String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        final String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         final List<String> errors = new ArrayList<>();
         for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());

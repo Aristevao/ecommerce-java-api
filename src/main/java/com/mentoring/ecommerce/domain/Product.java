@@ -26,5 +26,8 @@ public class Product {
     private String supplier;
 
     @Column
-    private String path;
+    private String fileName;
+
+    @Column
+    private String filePath;
 }

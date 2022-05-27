@@ -26,7 +26,7 @@ public class ProductFindService implements FindProductUserCase {
 
     @Override
     public Product findById(final Integer id) {
-        Optional<Product> product = port.findById(id);
+        final Optional<Product> product = port.findById(id);
         product.orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
         return product.get();
     }
