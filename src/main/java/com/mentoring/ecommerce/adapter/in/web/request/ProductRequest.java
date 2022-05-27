@@ -29,5 +29,5 @@ public class ProductRequest {
 
     private String fileName;
 
-    private String path;
+    private String filePath;
 }

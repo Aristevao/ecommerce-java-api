@@ -29,5 +29,5 @@ public class Product {
     private String fileName;
 
     @Column
-    private String path;
+    private String filePath;
 }

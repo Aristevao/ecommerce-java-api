@@ -22,5 +22,5 @@ public class ProductResponse extends RepresentationModel<ProductResponse> {
 
     private String supplier;
 
-    private String path;
+    private String filePath;
 }
