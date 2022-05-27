@@ -18,19 +18,19 @@ public class AmazonS3UploaderUtils {
 
     private final String filePathName = "product-photos";
     private String fileName = String.valueOf(UUID.randomUUID());
-    private String bucketName = "product-photo-bkt";
+    private final String bucketName = "product-photo-bkt";
 
     @Bean
-    public InputStream base64ToInputStream(String fileBase64) {
-        byte[] photo = decodeBase64(fileBase64);
+    public InputStream base64ToInputStream(final String fileBase64) {
+        final byte[] photo = decodeBase64(fileBase64);
         return new ByteArrayInputStream(photo);
     }
 
     @Bean
-    public String getFileFullPath(String fileName) {
+    public String getFileFullPath(final String fileName) {
         String extension;
         if (fileName != null) {
-            String[] splitFileName = fileName.split("[.]", 0);
+            final String[] splitFileName = fileName.split("[.]", 0);
             extension = splitFileName[splitFileName.length - 1];
             this.fileName = this.fileName.concat(".").concat(extension);
         }

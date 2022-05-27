@@ -21,13 +21,13 @@ public class ProductSaveService implements SaveProductUseCase {
     @Override
     public Product saveProduct(final Product product) {
         String fullPath = null;
-        if (product.getPath() != null) {
-            AmazonS3UploaderUtils s3Utils = new AmazonS3UploaderUtils();
+        if (product.getFilePath() != null) {
+            final AmazonS3UploaderUtils s3Utils = new AmazonS3UploaderUtils();
             fullPath = s3Utils.getFileFullPath(product.getFileName());
-            InputStream fis = s3Utils.base64ToInputStream(product.getPath());
+            final InputStream fis = s3Utils.base64ToInputStream(product.getFilePath());
             uploadPort.upload(s3Utils.getFilePathName(), fis, s3Utils.getFileName());
         }
-        product.setPath(fullPath);
+        product.setFilePath(fullPath);
         return savePort.saveProduct(product);
     }
 }

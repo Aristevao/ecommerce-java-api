@@ -16,7 +16,7 @@ public class ProductUpdateServiceAspect {
 
     @Before("execution(* " + POINTCUT_PATH + ".updateProduct(..))")
     public void logUpdateProductOngoing(final JoinPoint joinPoint) {
-        Object[] args = joinPoint.getArgs();
+        final Object[] args = joinPoint.getArgs();
         log.info("Updating product {}", args[1]);
     }
 
