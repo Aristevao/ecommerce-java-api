@@ -2,7 +2,7 @@ package com.mentoring.ecommerce.application.port.out;
 
 import com.mentoring.ecommerce.domain.Product;
 
-public interface SaveProductPort {
+public interface UpdateProductPort {
 
-    Product saveProduct(final Product product);
+    Product updateProduct(final Product product, final Integer id);
 }
