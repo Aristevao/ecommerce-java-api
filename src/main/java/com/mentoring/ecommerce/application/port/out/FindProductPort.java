@@ -1,13 +1,14 @@
 package com.mentoring.ecommerce.application.port.out;
 
 import com.mentoring.ecommerce.domain.Product;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 public interface FindProductPort {
 
-    List<Product> findAll();
+    Page<Product> findAll(Pageable pageable);
 
     Optional<Product> findById(final Integer id);
 }

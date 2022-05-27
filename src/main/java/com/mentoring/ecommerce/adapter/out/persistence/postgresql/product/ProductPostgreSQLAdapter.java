@@ -6,8 +6,9 @@ import com.mentoring.ecommerce.application.port.out.FindProductPort;
 import com.mentoring.ecommerce.application.port.out.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
-import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -17,8 +18,8 @@ public class ProductPostgreSQLAdapter implements FindProductPort, SaveProductPor
     private final ProductPostgreSQLRepository repository;
 
     @Override
-    public List<Product> findAll() {
-        return repository.findAll();
+    public Page<Product> findAll(Pageable pageable) {
+        return repository.findAll(pageable);
     }
 
     @Override
