@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.service;
+package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
 import com.mentoring.ecommerce.domain.Product;
@@ -9,14 +9,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductUpdateService implements UpdateProductUserCase {
 
-    ProductFindService productFindService;
+    private final ProductFindService productFindService;
 
-    ProductSaveService productSaveService;
+    private final ProductSaveService productSaveService;
 
     @Override
-    public void updateProduct(final Product product, final Integer id) {
+    public Product updateProduct(final Product product, final Integer id) {
         productFindService.findById(id);
         product.setId(id);
-        productSaveService.saveProduct(product);
+        return productSaveService.saveProduct(product);
     }
 }
