@@ -16,18 +16,24 @@ import static org.apache.commons.codec.binary.Base64.decodeBase64;
 @Component
 public class AmazonS3UploaderUtils {
 
-    private final String FilePathName = "product-photos";
-    private final String FileName = String.valueOf(UUID.randomUUID());
-    private String bucketName = "product-photo-bkt";
+    private final String filePathName = "product-photos";
+    private String fileName = String.valueOf(UUID.randomUUID());
+    private final String bucketName = "product-photo-bkt";
 
     @Bean
-    public InputStream base64ToInputStream(String fileBase64) {
-        byte[] photo = decodeBase64(fileBase64);
+    public InputStream base64ToInputStream(final String fileBase64) {
+        final byte[] photo = decodeBase64(fileBase64);
         return new ByteArrayInputStream(photo);
     }
 
     @Bean
-    public String getFileFullPath() {
-        return bucketName.concat("/").concat(FilePathName).concat("/").concat(FileName);
+    public String getFileFullPath(final String fileName) {
+        String extension;
+        if (fileName != null) {
+            final String[] splitFileName = fileName.split("[.]", 0);
+            extension = splitFileName[splitFileName.length - 1];
+            this.fileName = this.fileName.concat(".").concat(extension);
+        }
+        return bucketName.concat("/").concat(filePathName).concat("/").concat(this.fileName);
     }
 }

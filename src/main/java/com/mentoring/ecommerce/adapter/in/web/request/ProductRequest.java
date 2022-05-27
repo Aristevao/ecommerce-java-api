@@ -27,5 +27,7 @@ public class ProductRequest {
     @NotBlank
     private String supplier;
 
-    private String path;
+    private String fileName;
+
+    private String filePath;
 }
