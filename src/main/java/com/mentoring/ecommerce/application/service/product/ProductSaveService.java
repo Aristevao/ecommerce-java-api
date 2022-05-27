@@ -23,9 +23,9 @@ public class ProductSaveService implements SaveProductUseCase {
         String fullPath = null;
         if (product.getPath() != null) {
             AmazonS3UploaderUtils s3Utils = new AmazonS3UploaderUtils();
+            fullPath = s3Utils.getFileFullPath(product.getFileName());
             InputStream fis = s3Utils.base64ToInputStream(product.getPath());
             uploadPort.upload(s3Utils.getFilePathName(), fis, s3Utils.getFileName());
-            fullPath = s3Utils.getFileFullPath();
         }
         product.setPath(fullPath);
         return savePort.saveProduct(product);
