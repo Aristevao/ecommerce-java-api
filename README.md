@@ -1,5 +1,5 @@
 ## Summary
-This project has a RESTful API based on an ecommerce. Implemented in Java with Spring-boot framework, contemplating the following resources:
+This project is a RESTful API based on an ecommerce. Implemented in Java with Spring-boot framework, contemplating the following resources:
 - Hexagonal Architecture - Package structure organization
 - Correlation ID - Identifier value that is attached to requests for debugging and trace.
 - AOP Annotation - The core business logic isn't polluted with transaction code (logs)
