@@ -1,7 +1,7 @@
 package com.mentoring.ecommerce.application.service.product;
 
-import com.mentoring.ecommerce.application.port.in.DeleteProductUserCase;
-import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
+import com.mentoring.ecommerce.application.port.in.product.DeleteProductUserCase;
+import com.mentoring.ecommerce.application.port.out.product.DeleteProductPort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

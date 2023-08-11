@@ -3,8 +3,8 @@ package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.common.exceptions.ProductNotFoundException;
 import com.mentoring.common.pagination.PageBuilder;
-import com.mentoring.ecommerce.application.port.in.FindProductUserCase;
-import com.mentoring.ecommerce.application.port.out.FindProductPort;
+import com.mentoring.ecommerce.application.port.in.product.FindProductUserCase;
+import com.mentoring.ecommerce.application.port.out.product.FindProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

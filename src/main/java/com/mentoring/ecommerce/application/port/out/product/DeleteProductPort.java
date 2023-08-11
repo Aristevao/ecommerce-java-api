@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.port.out;
+package com.mentoring.ecommerce.application.port.out.product;
 
 public interface DeleteProductPort {
 

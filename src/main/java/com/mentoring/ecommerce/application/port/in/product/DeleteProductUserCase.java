@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.port.in;
+package com.mentoring.ecommerce.application.port.in.product;
 
 import com.mentoring.common.annotaion.UseCase;
 

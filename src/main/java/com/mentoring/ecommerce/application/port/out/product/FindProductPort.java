@@ -1,14 +1,14 @@
-package com.mentoring.ecommerce.application.port.in;
+package com.mentoring.ecommerce.application.port.out.product;
 
-import com.mentoring.common.annotaion.UseCase;
 import com.mentoring.ecommerce.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
-@UseCase
-public interface FindProductUserCase {
+import java.util.Optional;
+
+public interface FindProductPort {
 
     Page<Product> findAll(Pageable pageable);
 
-    Product findById(final Integer id);
+    Optional<Product> findById(final Integer id);
 }

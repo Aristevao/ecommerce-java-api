@@ -1,6 +1,6 @@
 package com.mentoring.ecommerce.application.service.product;
 
-import com.mentoring.ecommerce.application.port.in.UpdateProductUserCase;
+import com.mentoring.ecommerce.application.port.in.product.UpdateProductUserCase;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
