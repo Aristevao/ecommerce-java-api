@@ -1,11 +1,11 @@
 package com.mentoring.ecommerce.adapter.in.web;
 
+import javax.validation.Valid;
+
 import com.mentoring.ecommerce.adapter.in.web.request.UserRequest;
 import com.mentoring.ecommerce.application.port.in.user.FindUserUseCase;
 import com.mentoring.ecommerce.application.port.in.user.SaveUserUseCase;
-import com.mentoring.ecommerce.domain.User;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,20 +19,11 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 
     private final SaveUserUseCase saveUserUseCase;
-    private final FindUserUseCase findUserUseCase;
-    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody UserRequest userRequest) {
-        if (findUserUseCase.findByUsername(userRequest.getUsername()) != null) {
-            return ResponseEntity.badRequest().body("Username is already taken.");
-        }
+    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRequest userRequest) {
 
-        User newUser = new User();
-        newUser.setUsername(userRequest.getUsername());
-        newUser.setPassword(passwordEncoder.encode(userRequest.getPassword()));
-
-        saveUserUseCase.save(newUser);
+        saveUserUseCase.save(userRequest);
 
         return ResponseEntity.ok("User registered successfully.");
     }
