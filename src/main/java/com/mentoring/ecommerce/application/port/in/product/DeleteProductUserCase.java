@@ -5,5 +5,5 @@ import com.mentoring.common.annotaion.UseCase;
 @UseCase
 public interface DeleteProductUserCase {
 
-    void deleteProduct(final Integer id);
+    void delete(final Integer id);
 }

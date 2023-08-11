@@ -6,5 +6,5 @@ import com.mentoring.ecommerce.domain.Product;
 @UseCase
 public interface UpdateProductUserCase {
 
-    Product updateProduct(final Product product, final Integer id);
+    Product update(final Product product, final Integer id);
 }

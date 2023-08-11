@@ -19,7 +19,7 @@ public class ProductSaveService implements SaveProductUseCase {
     private final SaveProductPort savePort;
 
     @Override
-    public Product saveProduct(final Product product) {
+    public Product save(final Product product) {
         String fullPath = null;
         if (product.getFilePath() != null) {
             final AmazonS3UploaderUtils s3Utils = new AmazonS3UploaderUtils();

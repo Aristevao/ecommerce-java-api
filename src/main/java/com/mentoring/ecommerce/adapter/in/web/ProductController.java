@@ -39,7 +39,7 @@ public class ProductController {
     @PostMapping
     @ResponseStatus(CREATED)
     public ProductResponse saveProduct(@Valid @RequestBody final ProductRequest request) {
-        final Product product = saveUseCase.saveProduct(productMapper.toDomain(request));
+        final Product product = saveUseCase.save(productMapper.toDomain(request));
         return productMapper.toResponse(product)
                 .add(linkTo(methodOn(ProductController.class).findProductById(product.getId())).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findAllProducts(new PageBuilder().build())).withRel("products"));
@@ -65,7 +65,7 @@ public class ProductController {
     public ProductResponse updateProduct(
             @RequestBody final ProductRequest request,
             @PathVariable(name = "productId") final Integer id) {
-        final Product product = updateUseCase.updateProduct(productMapper.toDomain(request), id);
+        final Product product = updateUseCase.update(productMapper.toDomain(request), id);
         return productMapper.toResponse(product)
                 .add(linkTo(methodOn(ProductController.class).findProductById(id)).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findAllProducts(new PageBuilder().build())).withRel("products"));
@@ -74,7 +74,7 @@ public class ProductController {
     @DeleteMapping("{productId}")
     @ResponseStatus(NO_CONTENT)
     ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") final Integer id) {
-        deleteUseCase.deleteProduct(id);
+        deleteUseCase.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
