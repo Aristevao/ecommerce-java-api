@@ -24,7 +24,9 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ProductControllerAdvice extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                                  HttpHeaders headers, HttpStatus status,
+                                                                  WebRequest request) {
         logger.info(ex.getClass().getName());
         String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
         List<String> errors = new ArrayList<>();
@@ -34,14 +36,16 @@ public class ProductControllerAdvice extends ResponseEntityExceptionHandler {
         for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
-        ErrorEntity error = new ErrorEntity(BAD_REQUEST.value(), errors, message, ((ServletWebRequest) request).getRequest().getRequestURI());
+        ErrorEntity error = new ErrorEntity(BAD_REQUEST.value(), errors, message, // TODO: Replace with builder
+                ((ServletWebRequest) request).getRequest().getRequestURI());
         return handleExceptionInternal(
                 ex, error, headers, BAD_REQUEST, request);
     }
 
+    // TODO: Common error. Generalize. Probably inheritance
     @ExceptionHandler({NotFoundException.class})
     public ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
-        ErrorEntity errorEntity = new ErrorEntity(NOT_FOUND.value(), ex.getMessage(),
+        ErrorEntity errorEntity = new ErrorEntity(NOT_FOUND.value(), ex.getMessage(), // TODO: Replace with builder
                 ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI());
         return new ResponseEntity<>(errorEntity, NOT_FOUND);
     }
