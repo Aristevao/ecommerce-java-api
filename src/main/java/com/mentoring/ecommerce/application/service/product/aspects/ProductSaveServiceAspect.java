@@ -13,12 +13,12 @@ public class ProductSaveServiceAspect {
 
     private final static String POINTCUT_PATH = "com.mentoring.ecommerce.application.service.product.ProductSaveService";
 
-    @Before("execution(* " + POINTCUT_PATH + ".saveProduct(..))")
+    @Before("execution(* " + POINTCUT_PATH + ".save(..))")
     public void logSaveProductOngoing() {
         log.info("Registering product");
     }
 
-    @After("execution(* " + POINTCUT_PATH + ".saveProduct(..))")
+    @After("execution(* " + POINTCUT_PATH + ".save(..))")
     public void logSaveProductSuccess() {
         log.info("Successfully registered product");
     }

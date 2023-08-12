@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class UserDeleteServiceUse implements DeleteUserUseCase {
+public class UserDeleteService implements DeleteUserUseCase {
 
     private final UserFindService userFindService;
 

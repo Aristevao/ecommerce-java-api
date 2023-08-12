@@ -8,7 +8,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Component
-public class UserUpdateServiceUse implements UpdateUserUseCase {
+public class UserUpdateService implements UpdateUserUseCase {
 
     private final UserFindService userFindService;
 

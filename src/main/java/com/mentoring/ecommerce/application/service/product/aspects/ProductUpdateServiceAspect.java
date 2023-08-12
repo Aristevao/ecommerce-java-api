@@ -14,13 +14,13 @@ public class ProductUpdateServiceAspect {
 
     private final static String POINTCUT_PATH = "com.mentoring.ecommerce.application.service.product.ProductUpdateService";
 
-    @Before("execution(* " + POINTCUT_PATH + ".updateProduct(..))")
+    @Before("execution(* " + POINTCUT_PATH + ".update(..))")
     public void logUpdateProductOngoing(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         log.info("Updating product {}", args[1]);
     }
 
-    @After("execution(* " + POINTCUT_PATH + ".updateProduct(..))")
+    @After("execution(* " + POINTCUT_PATH + ".update(..))")
     public void logUpdateProductSuccess() {
         log.info("Successfully updated product");
     }
