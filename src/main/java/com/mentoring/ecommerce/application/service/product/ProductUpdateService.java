@@ -1,13 +1,13 @@
 package com.mentoring.ecommerce.application.service.product;
 
-import com.mentoring.ecommerce.application.port.in.product.UpdateProductUserCase;
+import com.mentoring.ecommerce.application.port.in.product.UpdateProductUseCase;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 @RequiredArgsConstructor
 @Component
-public class ProductUpdateService implements UpdateProductUserCase {
+public class ProductUpdateService implements UpdateProductUseCase {
 
     private final ProductFindService productFindService;
 

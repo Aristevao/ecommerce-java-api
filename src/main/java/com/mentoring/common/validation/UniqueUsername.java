@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.validation;
+package com.mentoring.common.validation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

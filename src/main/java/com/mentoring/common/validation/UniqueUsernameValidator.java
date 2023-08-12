@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.application.validation;
+package com.mentoring.common.validation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

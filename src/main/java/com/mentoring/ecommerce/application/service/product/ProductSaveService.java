@@ -3,7 +3,7 @@ package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.common.utils.AmazonS3UploaderUtils;
 import com.mentoring.ecommerce.application.port.in.product.SaveProductUseCase;
-import com.mentoring.ecommerce.application.port.out.S3HandlerPort;
+import com.mentoring.ecommerce.application.port.out.aws.S3HandlerPort;
 import com.mentoring.ecommerce.application.port.out.product.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;

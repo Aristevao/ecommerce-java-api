@@ -4,7 +4,7 @@ import com.mentoring.common.annotaion.UseCase;
 import com.mentoring.ecommerce.domain.Product;
 
 @UseCase
-public interface UpdateProductUserCase {
+public interface UpdateProductUseCase {
 
     Product update(Product product, Integer id);
 }

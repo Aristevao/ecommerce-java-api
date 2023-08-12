@@ -11,10 +11,10 @@ import javax.validation.Valid;
 import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.adapter.in.web.dto.ProductDTO;
 import com.mentoring.ecommerce.adapter.in.web.mapper.ProductMapper;
-import com.mentoring.ecommerce.application.port.in.product.DeleteProductUserCase;
-import com.mentoring.ecommerce.application.port.in.product.FindProductUserCase;
+import com.mentoring.ecommerce.application.port.in.product.DeleteProductUseCase;
+import com.mentoring.ecommerce.application.port.in.product.FindProductUseCase;
 import com.mentoring.ecommerce.application.port.in.product.SaveProductUseCase;
-import com.mentoring.ecommerce.application.port.in.product.UpdateProductUserCase;
+import com.mentoring.ecommerce.application.port.in.product.UpdateProductUseCase;
 import com.mentoring.ecommerce.domain.Product;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,11 +38,11 @@ public class ProductController {
 
     private final SaveProductUseCase saveUseCase;
 
-    private final FindProductUserCase findUseCase;
+    private final FindProductUseCase findUseCase;
 
-    private final UpdateProductUserCase updateUseCase;
+    private final UpdateProductUseCase updateUseCase;
 
-    private final DeleteProductUserCase deleteUseCase;
+    private final DeleteProductUseCase deleteUseCase;
 
     private final ProductMapper productMapper;
 

@@ -3,7 +3,7 @@ package com.mentoring.ecommerce.application.service.product;
 
 import com.mentoring.common.exceptions.NotFoundException;
 import com.mentoring.common.pagination.PageBuilder;
-import com.mentoring.ecommerce.application.port.in.product.FindProductUserCase;
+import com.mentoring.ecommerce.application.port.in.product.FindProductUseCase;
 import com.mentoring.ecommerce.application.port.out.product.FindProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Component
-public class ProductFindService implements FindProductUserCase {
+public class ProductFindService implements FindProductUseCase {
 
     private final FindProductPort port;
 

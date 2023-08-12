@@ -11,10 +11,10 @@ import javax.validation.Valid;
 import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.adapter.in.web.dto.UserDTO;
 import com.mentoring.ecommerce.adapter.in.web.mapper.UserMapper;
-import com.mentoring.ecommerce.application.port.in.user.DeleteUserUserCase;
+import com.mentoring.ecommerce.application.port.in.user.DeleteUserUseCase;
 import com.mentoring.ecommerce.application.port.in.user.FindUserUseCase;
 import com.mentoring.ecommerce.application.port.in.user.SaveUserUseCase;
-import com.mentoring.ecommerce.application.port.in.user.UpdateUserUserCase;
+import com.mentoring.ecommerce.application.port.in.user.UpdateUserUseCase;
 import com.mentoring.ecommerce.domain.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -40,9 +40,9 @@ public class UserController {
 
     private final FindUserUseCase findUseCase;
 
-    private final UpdateUserUserCase updateUseCase;
+    private final UpdateUserUseCase updateUseCase;
 
-    private final DeleteUserUserCase deleteUseCase;
+    private final DeleteUserUseCase deleteUseCase;
 
     private final UserMapper userMapper;
 
