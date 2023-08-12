@@ -4,9 +4,12 @@ package com.mentoring.ecommerce.application.service.user;
 import java.util.Optional;
 
 import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.application.port.in.user.FindUserUseCase;
 import com.mentoring.ecommerce.application.port.out.user.FindUserPort;
 import com.mentoring.ecommerce.domain.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import lombok.RequiredArgsConstructor;
@@ -17,6 +20,12 @@ public class UserFindService implements FindUserUseCase {
 
     private final FindUserPort port;
 
+
+    @Override
+    public Page<User> findAll(Pageable pageable) {
+        return port.findAll(new PageBuilder().setPage(pageable.getPageNumber()).build());
+    }
+
     @Override
     public User findByUsername(String username) {
         return port.findByUsername(username);
@@ -25,7 +34,7 @@ public class UserFindService implements FindUserUseCase {
     @Override
     public User findById(final Integer id) {
         final Optional<User> user = port.findById(id);
-        user.orElseThrow(() -> new ProductNotFoundException("User not found: " + id));
+        user.orElseThrow(() -> new ProductNotFoundException("User not found: " + id)); // TODO: REMOVE
         return user.get();
     }
 }
