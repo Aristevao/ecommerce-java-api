@@ -34,7 +34,7 @@ public class UserFindService implements FindUserUseCase {
     @Override
     public User findById(final Integer id) {
         final Optional<User> user = port.findById(id);
-        user.orElseThrow(() -> new NotFoundException("User not found: " + id)); // TODO: REMOVE
+        user.orElseThrow(() -> new NotFoundException("User not found: " + id));
         return user.get();
     }
 }
