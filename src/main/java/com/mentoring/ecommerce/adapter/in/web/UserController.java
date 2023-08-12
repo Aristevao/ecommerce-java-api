@@ -2,6 +2,7 @@ package com.mentoring.ecommerce.adapter.in.web;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+import static org.springframework.http.HttpStatus.CREATED;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
@@ -46,10 +47,12 @@ public class UserController {
     private final UserMapper userMapper;
 
     @PostMapping
-    public UserDTO save(@RequestBody @Valid UserDTO request) {
+    @ResponseStatus(CREATED)
+    public UserDTO save(@Valid @RequestBody final UserDTO request) {
         final User user = saveUserUseCase.save(userMapper.toEntity(request));
-        saveUserUseCase.save(user);
-        return userMapper.toDto(user);
+        return userMapper.toDto(user)
+                .add(linkTo(methodOn(UserController.class).findUserById(user.getId())).withSelfRel())
+                .add(linkTo(methodOn(UserController.class).findAllUsers(new PageBuilder().build())).withRel("users"));
     }
 
     @GetMapping
