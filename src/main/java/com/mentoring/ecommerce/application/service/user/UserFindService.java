@@ -3,7 +3,7 @@ package com.mentoring.ecommerce.application.service.user;
 
 import java.util.Optional;
 
-import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.common.exceptions.NotFoundException;
 import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.application.port.in.user.FindUserUseCase;
 import com.mentoring.ecommerce.application.port.out.user.FindUserPort;
@@ -34,7 +34,7 @@ public class UserFindService implements FindUserUseCase {
     @Override
     public User findById(final Integer id) {
         final Optional<User> user = port.findById(id);
-        user.orElseThrow(() -> new ProductNotFoundException("User not found: " + id)); // TODO: REMOVE
+        user.orElseThrow(() -> new NotFoundException("User not found: " + id)); // TODO: REMOVE
         return user.get();
     }
 }

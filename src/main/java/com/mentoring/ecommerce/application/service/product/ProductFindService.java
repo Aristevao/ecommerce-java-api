@@ -1,7 +1,7 @@
 package com.mentoring.ecommerce.application.service.product;
 
 
-import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.common.exceptions.NotFoundException;
 import com.mentoring.common.pagination.PageBuilder;
 import com.mentoring.ecommerce.application.port.in.product.FindProductUserCase;
 import com.mentoring.ecommerce.application.port.out.product.FindProductPort;
@@ -27,7 +27,7 @@ public class ProductFindService implements FindProductUserCase {
     @Override
     public Product findById(final Integer id) {
         final Optional<Product> product = port.findById(id);
-        product.orElseThrow(() -> new ProductNotFoundException("Product not found: " + id));
+        product.orElseThrow(() -> new NotFoundException("Product not found: " + id));
         return product.get();
     }
 }

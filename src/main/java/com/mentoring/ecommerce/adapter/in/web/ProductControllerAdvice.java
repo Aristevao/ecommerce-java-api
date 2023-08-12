@@ -6,7 +6,7 @@ import static org.springframework.http.HttpStatus.NOT_FOUND;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.mentoring.common.exceptions.ProductNotFoundException;
+import com.mentoring.common.exceptions.NotFoundException;
 import com.mentoring.ecommerce.adapter.in.web.dto.ErrorEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -39,8 +39,8 @@ public class ProductControllerAdvice extends ResponseEntityExceptionHandler {
                 ex, error, headers, BAD_REQUEST, request);
     }
 
-    @ExceptionHandler({ProductNotFoundException.class})
-    public ResponseEntity<Object> handleNotFoundException(final ProductNotFoundException ex, final WebRequest request) {
+    @ExceptionHandler({NotFoundException.class})
+    public ResponseEntity<Object> handleNotFoundException(final NotFoundException ex, final WebRequest request) {
         final ErrorEntity errorEntity = new ErrorEntity(NOT_FOUND.value(), ex.getMessage(),
                 ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI());
         return new ResponseEntity<>(errorEntity, NOT_FOUND);
