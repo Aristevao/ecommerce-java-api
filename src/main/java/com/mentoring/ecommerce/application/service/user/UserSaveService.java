@@ -15,10 +15,7 @@ public class UserSaveService implements SaveUserUseCase {
     private final SaveUserPort port;
 
     @Override
-    public User save(User userRequest) {
-        User newUser = new User();
-        newUser.setUsername(userRequest.getUsername());
-        newUser.setPassword(userRequest.getPassword());
-        return port.save(newUser);
+    public User save(User user) {
+        return port.save(user);
     }
 }
