@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.adapter.in.web.response;
+package com.mentoring.ecommerce.adapter.in.web.dto;
 
 import lombok.Data;
 

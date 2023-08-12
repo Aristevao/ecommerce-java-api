@@ -1,7 +1,13 @@
 package com.mentoring.ecommerce.adapter.in.web;
 
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import com.mentoring.common.exceptions.ProductNotFoundException;
-import com.mentoring.ecommerce.adapter.in.web.response.ErrorEntity;
+import com.mentoring.ecommerce.adapter.in.web.dto.ErrorEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,12 +19,6 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.NOT_FOUND;
 
 @ControllerAdvice
 public class ProductControllerAdvice extends ResponseEntityExceptionHandler {

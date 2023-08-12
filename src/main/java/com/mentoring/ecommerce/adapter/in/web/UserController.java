@@ -3,8 +3,7 @@ package com.mentoring.ecommerce.adapter.in.web;
 import javax.validation.Valid;
 
 import com.mentoring.ecommerce.adapter.in.web.mapper.UserMapper;
-import com.mentoring.ecommerce.adapter.in.web.request.UserRequest;
-import com.mentoring.ecommerce.adapter.in.web.response.UserResponse;
+import com.mentoring.ecommerce.adapter.in.web.dto.UserDTO;
 import com.mentoring.ecommerce.application.port.in.user.SaveUserUseCase;
 import com.mentoring.ecommerce.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,10 +23,10 @@ public class UserController {
     private final UserMapper productMapper;
 
     @PostMapping
-    public UserResponse save(@RequestBody @Valid UserRequest request) {
-        final User user = saveUserUseCase.save(productMapper.toDomain(request));
+    public UserDTO save(@RequestBody @Valid UserDTO request) {
+        final User user = saveUserUseCase.save(productMapper.toEntity(request));
         saveUserUseCase.save(user);
-        return productMapper.toResponse(user);
+        return productMapper.toDto(user);
     }
 }
 

@@ -1,14 +1,12 @@
-package com.mentoring.ecommerce.adapter.in.web.response;
+package com.mentoring.ecommerce.adapter.in.web.dto;
 
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
-public class UserResponse {
-
+public class LoginDTO {
     private String username;
-
     private String password;
 }
 
