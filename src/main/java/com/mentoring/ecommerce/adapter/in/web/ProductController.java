@@ -48,8 +48,8 @@ public class ProductController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public ProductDTO saveProduct(@Valid @RequestBody final ProductDTO request) {
-        final Product product = saveUseCase.save(productMapper.toEntity(request));
+    public ProductDTO saveProduct(@Valid @RequestBody ProductDTO request) {
+        Product product = saveUseCase.save(productMapper.toEntity(request));
         return productMapper.toDto(product)
                 .add(linkTo(methodOn(ProductController.class).findProductById(product.getId())).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findAllProducts(new PageBuilder().build())).withRel("products"));
@@ -57,13 +57,13 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<Page<ProductDTO>> findAllProducts(Pageable pageable) {
-        final Page<Product> products = findUseCase.findAll(pageable);
-        final Page<ProductDTO> response = productMapper.toDto(products);
+        Page<Product> products = findUseCase.findAll(pageable);
+        Page<ProductDTO> response = productMapper.toDto(products);
         return new ResponseEntity<>(response, OK);
     }
 
     @GetMapping("{productId}")
-    public ProductDTO findProductById(@PathVariable(name = "productId") final Integer id) {
+    public ProductDTO findProductById(@PathVariable(name = "productId") Integer id) {
         return productMapper.toDto(findUseCase.findById(id))
                 .add(linkTo(ProductController.class).slash(id).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findProductById(id)).withRel("update"))
@@ -73,9 +73,9 @@ public class ProductController {
 
     @PutMapping("{productId}")
     public ProductDTO updateProduct(
-            @RequestBody final ProductDTO request,
-            @PathVariable(name = "productId") final Integer id) {
-        final Product product = updateUseCase.update(productMapper.toEntity(request), id);
+            @RequestBody ProductDTO request,
+            @PathVariable(name = "productId") Integer id) {
+        Product product = updateUseCase.update(productMapper.toEntity(request), id);
         return productMapper.toDto(product)
                 .add(linkTo(methodOn(ProductController.class).findProductById(id)).withSelfRel())
                 .add(linkTo(methodOn(ProductController.class).findAllProducts(new PageBuilder().build())).withRel("products"));
@@ -83,7 +83,7 @@ public class ProductController {
 
     @DeleteMapping("{productId}")
     @ResponseStatus(NO_CONTENT)
-    ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") final Integer id) {
+    ResponseEntity<Void> deleteProduct(@PathVariable(name = "productId") Integer id) {
         deleteUseCase.delete(id);
         return ResponseEntity.noContent().build();
     }

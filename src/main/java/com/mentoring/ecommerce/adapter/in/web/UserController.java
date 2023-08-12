@@ -48,8 +48,8 @@ public class UserController {
 
     @PostMapping
     @ResponseStatus(CREATED)
-    public UserDTO save(@Valid @RequestBody final UserDTO request) {
-        final User user = saveUserUseCase.save(userMapper.toEntity(request));
+    public UserDTO save(@Valid @RequestBody UserDTO request) {
+        User user = saveUserUseCase.save(userMapper.toEntity(request));
         return userMapper.toDto(user)
                 .add(linkTo(methodOn(UserController.class).findUserById(user.getId())).withSelfRel())
                 .add(linkTo(methodOn(UserController.class).findAllUsers(new PageBuilder().build())).withRel("users"));
@@ -57,13 +57,13 @@ public class UserController {
 
     @GetMapping
     public ResponseEntity<Page<UserDTO>> findAllUsers(Pageable pageable) {
-        final Page<User> users = findUseCase.findAll(pageable);
-        final Page<UserDTO> response = userMapper.toDto(users);
+        Page<User> users = findUseCase.findAll(pageable);
+        Page<UserDTO> response = userMapper.toDto(users);
         return new ResponseEntity<>(response, OK);
     }
 
     @GetMapping("{userId}")
-    public UserDTO findUserById(@PathVariable(name = "userId") final Integer id) {
+    public UserDTO findUserById(@PathVariable(name = "userId") Integer id) {
         return userMapper.toDto(findUseCase.findById(id))
                 .add(linkTo(UserController.class).slash(id).withSelfRel())
                 .add(linkTo(methodOn(UserController.class).findUserById(id)).withRel("update"))
@@ -73,9 +73,9 @@ public class UserController {
 
     @PutMapping("{userId}")
     public UserDTO updateUser(
-            @RequestBody final UserDTO request,
-            @PathVariable(name = "userId") final Integer id) {
-        final User user = updateUseCase.update(userMapper.toEntity(request), id);
+            @RequestBody UserDTO request,
+            @PathVariable(name = "userId") Integer id) {
+        User user = updateUseCase.update(userMapper.toEntity(request), id);
         return userMapper.toDto(user)
                 .add(linkTo(methodOn(UserController.class).findUserById(id)).withSelfRel())
                 .add(linkTo(methodOn(UserController.class).findAllUsers(new PageBuilder().build())).withRel("users"));
@@ -83,7 +83,7 @@ public class UserController {
 
     @DeleteMapping("{userId}")
     @ResponseStatus(NO_CONTENT)
-    ResponseEntity<Void> deleteUser(@PathVariable(name = "userId") final Integer id) {
+    ResponseEntity<Void> deleteUser(@PathVariable(name = "userId") Integer id) {
         deleteUseCase.delete(id);
         return ResponseEntity.noContent().build();
     }

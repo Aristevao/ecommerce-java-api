@@ -20,7 +20,6 @@ public class UserFindService implements FindUserUseCase {
 
     private final FindUserPort port;
 
-
     @Override
     public Page<User> findAll(Pageable pageable) {
         return port.findAll(new PageBuilder().setPage(pageable.getPageNumber()).build());
@@ -32,8 +31,8 @@ public class UserFindService implements FindUserUseCase {
     }
 
     @Override
-    public User findById(final Integer id) {
-        final Optional<User> user = port.findById(id);
+    public User findById(Integer id) {
+        Optional<User> user = port.findById(id);
         user.orElseThrow(() -> new NotFoundException("User not found: " + id));
         return user.get();
     }

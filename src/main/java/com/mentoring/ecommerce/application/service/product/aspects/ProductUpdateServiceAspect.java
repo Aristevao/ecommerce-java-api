@@ -15,8 +15,8 @@ public class ProductUpdateServiceAspect {
     private final static String POINTCUT_PATH = "com.mentoring.ecommerce.application.service.product.ProductUpdateService";
 
     @Before("execution(* " + POINTCUT_PATH + ".updateProduct(..))")
-    public void logUpdateProductOngoing(final JoinPoint joinPoint) {
-        final Object[] args = joinPoint.getArgs();
+    public void logUpdateProductOngoing(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
         log.info("Updating product {}", args[1]);
     }
 

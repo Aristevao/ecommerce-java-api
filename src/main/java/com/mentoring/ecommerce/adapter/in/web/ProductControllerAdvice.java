@@ -24,24 +24,24 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class ProductControllerAdvice extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleMethodArgumentNotValid(final MethodArgumentNotValidException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         logger.info(ex.getClass().getName());
-        final String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
-        final List<String> errors = new ArrayList<>();
-        for (final FieldError error : ex.getBindingResult().getFieldErrors()) {
+        String message = ex.getBindingResult().getFieldErrors().get(0).getDefaultMessage();
+        List<String> errors = new ArrayList<>();
+        for (FieldError error : ex.getBindingResult().getFieldErrors()) {
             errors.add(error.getField() + ": " + error.getDefaultMessage());
         }
-        for (final ObjectError error : ex.getBindingResult().getGlobalErrors()) {
+        for (ObjectError error : ex.getBindingResult().getGlobalErrors()) {
             errors.add(error.getObjectName() + ": " + error.getDefaultMessage());
         }
-        final ErrorEntity error = new ErrorEntity(BAD_REQUEST.value(), errors, message, ((ServletWebRequest) request).getRequest().getRequestURI());
+        ErrorEntity error = new ErrorEntity(BAD_REQUEST.value(), errors, message, ((ServletWebRequest) request).getRequest().getRequestURI());
         return handleExceptionInternal(
                 ex, error, headers, BAD_REQUEST, request);
     }
 
     @ExceptionHandler({NotFoundException.class})
-    public ResponseEntity<Object> handleNotFoundException(final NotFoundException ex, final WebRequest request) {
-        final ErrorEntity errorEntity = new ErrorEntity(NOT_FOUND.value(), ex.getMessage(),
+    public ResponseEntity<Object> handleNotFoundException(NotFoundException ex, WebRequest request) {
+        ErrorEntity errorEntity = new ErrorEntity(NOT_FOUND.value(), ex.getMessage(),
                 ex.getMessage(), ((ServletWebRequest) request).getRequest().getRequestURI());
         return new ResponseEntity<>(errorEntity, NOT_FOUND);
     }

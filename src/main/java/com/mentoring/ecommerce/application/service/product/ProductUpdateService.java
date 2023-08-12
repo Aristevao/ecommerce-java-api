@@ -14,7 +14,7 @@ public class ProductUpdateService implements UpdateProductUserCase {
     private final ProductSaveService productSaveService;
 
     @Override
-    public Product update(final Product product, final Integer id) {
+    public Product update(Product product, Integer id) {
         productFindService.findById(id);
         product.setId(id);
         return productSaveService.save(product);

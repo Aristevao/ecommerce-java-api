@@ -15,7 +15,7 @@ public class UserDeleteService implements DeleteUserUserCase {
     private final DeleteUserPort port;
 
     @Override
-    public void delete(final Integer id) {
+    public void delete(Integer id) {
         userFindService.findById(id);
         port.delete(id);
     }

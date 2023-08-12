@@ -1,11 +1,12 @@
 package com.mentoring.ecommerce.adapter.out.amazon;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Aspect
 @Slf4j
@@ -15,8 +16,8 @@ public class AmazonS3AdapterAspect {
     private final static String POINTCUT_PATH = "com.mentoring.ecommerce.adapter.out.amazon.AmazonS3Adapter";
 
     @Before("execution(* " + POINTCUT_PATH + ".upload(..))")
-    public void logUploadOngoing(final JoinPoint joinPoint) {
-        final Object[] args = joinPoint.getArgs();
+    public void logUploadOngoing(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
         log.info("Uploading file {} to S3 bucket {}", args[0], args[1]);
     }
 
@@ -26,8 +27,8 @@ public class AmazonS3AdapterAspect {
     }
 
     @Before("execution(* " + POINTCUT_PATH + ".listBuckets(..))")
-    public void logListBucketsOngoing(final JoinPoint joinPoint) {
-        final Object[] args = joinPoint.getArgs();
+    public void logListBucketsOngoing(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
         log.info("Listing S3 buckets");
     }
 

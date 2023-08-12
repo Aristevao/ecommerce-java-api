@@ -15,8 +15,8 @@ public class ProductDeleteServiceAspect {
     private final static String POINTCUT_PATH = "com.mentoring.ecommerce.application.service.product.ProductDeleteService";
 
     @Before("execution(* " + POINTCUT_PATH + ".deleteProduct(..))")
-    public void logDeleteProductOngoing(final JoinPoint joinPoint) {
-        final Object[] args = joinPoint.getArgs();
+    public void logDeleteProductOngoing(JoinPoint joinPoint) {
+        Object[] args = joinPoint.getArgs();
         log.info("Deleting product {}", args[0]);
     }
 

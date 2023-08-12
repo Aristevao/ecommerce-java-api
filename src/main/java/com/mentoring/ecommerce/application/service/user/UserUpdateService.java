@@ -15,7 +15,7 @@ public class UserUpdateService implements UpdateUserUserCase {
     private final UserSaveService userSaveService;
 
     @Override
-    public User update(final User user, final Integer id) {
+    public User update(User user, Integer id) {
         userFindService.findById(id);
         user.setId(id);
         return userSaveService.save(user);

@@ -14,7 +14,7 @@ public class ProductDeleteService implements DeleteProductUserCase {
     private final DeleteProductPort port;
 
     @Override
-    public void delete(final Integer id) {
+    public void delete(Integer id) {
         productFindService.findById(id);
         port.deleteProduct(id);
     }
