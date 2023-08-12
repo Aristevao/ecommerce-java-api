@@ -2,10 +2,11 @@ package com.mentoring.ecommerce.adapter.in.web;
 
 import javax.validation.Valid;
 
+import com.mentoring.ecommerce.adapter.in.web.mapper.UserMapper;
 import com.mentoring.ecommerce.adapter.in.web.request.UserRequest;
-import com.mentoring.ecommerce.application.port.in.user.FindUserUseCase;
+import com.mentoring.ecommerce.adapter.in.web.response.UserResponse;
 import com.mentoring.ecommerce.application.port.in.user.SaveUserUseCase;
-import org.springframework.http.ResponseEntity;
+import com.mentoring.ecommerce.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +21,13 @@ public class UserController {
 
     private final SaveUserUseCase saveUserUseCase;
 
+    private final UserMapper productMapper;
+
     @PostMapping
-    public ResponseEntity<?> registerUser(@RequestBody @Valid UserRequest userRequest) {
-
-        saveUserUseCase.save(userRequest);
-
-        return ResponseEntity.ok("User registered successfully.");
+    public UserResponse save(@RequestBody @Valid UserRequest request) {
+        final User user = saveUserUseCase.save(productMapper.toDomain(request));
+        saveUserUseCase.save(user);
+        return productMapper.toResponse(user);
     }
 }
 

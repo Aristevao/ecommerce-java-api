@@ -1,10 +1,9 @@
 package com.mentoring.ecommerce.application.port.in.user;
 
 import com.mentoring.common.annotaion.UseCase;
-import com.mentoring.ecommerce.domain.User;
 
 @UseCase
-public interface SaveUserUseCase {
+public interface DeleteUserUserCase {
 
-    User save(User user);
+    void delete(final Integer id);
 }
