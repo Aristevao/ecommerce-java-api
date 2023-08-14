@@ -13,7 +13,7 @@ public class S3Configuration {
 
     @Value("${s3.bucket-name}")
     private String bucketName;
-    private static final String AWS_ACCESS_KEY_ID = "access-key";
+    private static final String AWS_ACCESS_KEY_ID = "access-key"; // Replace with valid credentials.
     private static final String AWS_SECRET_ACCESS_KEY = "access-key";
 
     @Bean
