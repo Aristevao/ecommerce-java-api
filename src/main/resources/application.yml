@@ -1,3 +1,6 @@
+server:
+  port: 9001
+
 spring:
   mvc:
     throw-exception-if-no-handler-found: true
@@ -33,8 +36,14 @@ bucket4j:
       url: /api/users
       http-response-body: "{ \"status\": 429, \"error\": \"Too Many Requests\", \"message\": \"You have exhausted your API Request Quota\" }"
       rate-limits:
-        - expression: "true"
+        - expression: "getHeader('api-key')"
+          execute-condition: "getHeader('api-key').startsWith('USER-')"
           bandwidths:
             - capacity: 3
-              time: 1
+              time: 2
               unit: minutes
+        - expression: "getHeader('api-key')"
+          bandwidths:
+            - capacity: 5
+              time: 1
+              unit: hours
