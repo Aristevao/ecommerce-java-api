@@ -33,7 +33,7 @@ bucket4j:
       url: /api/users
       http-response-body: "{ \"status\": 429, \"error\": \"Too Many Requests\", \"message\": \"You have exhausted your API Request Quota\" }"
       rate-limits:
-        - expression: "getHeader('api-key')"
+        - expression: "true"
           bandwidths:
             - capacity: 3
               time: 1
