@@ -1,6 +1,4 @@
 spring:
-  application:
-    name: bucket4j-starter-api-rate-limit-app
   mvc:
     throw-exception-if-no-handler-found: true
   resources:
@@ -32,15 +30,9 @@ bucket4j:
   enabled: true
   filters:
     - cache-name: rate-limit-buckets
-      url: /api/users.*
+      url: /api/users
       http-response-body: "{ \"status\": 429, \"error\": \"Too Many Requests\", \"message\": \"You have exhausted your API Request Quota\" }"
       rate-limits:
-        - expression: "getHeader('api-key')"
-          execute-condition: "getHeader('api-key').startsWith('BX001-')"
-          bandwidths:
-            - capacity: 5
-              time: 1
-              unit: minutes
         - expression: "getHeader('api-key')"
           bandwidths:
             - capacity: 3
