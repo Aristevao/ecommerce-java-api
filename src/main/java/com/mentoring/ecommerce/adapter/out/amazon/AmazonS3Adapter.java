@@ -3,7 +3,7 @@ package com.mentoring.ecommerce.adapter.out.amazon;
 import com.amazonaws.services.s3.model.Bucket;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.util.IOUtils;
-import com.mentoring.ecommerce.application.port.out.S3HandlerPort;
+import com.mentoring.ecommerce.application.port.out.aws.S3HandlerPort;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

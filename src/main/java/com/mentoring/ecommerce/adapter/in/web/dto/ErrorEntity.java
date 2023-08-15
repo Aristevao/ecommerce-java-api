@@ -1,4 +1,4 @@
-package com.mentoring.ecommerce.adapter.in.web.response;
+package com.mentoring.ecommerce.adapter.in.web.dto;
 
 import lombok.Data;
 
@@ -13,7 +13,7 @@ public class ErrorEntity {
     private String message;
     private String path;
 
-    public ErrorEntity(final int status, final String error, final String message, final String path) {
+    public ErrorEntity(int status, String error, String message, String path) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         errors = List.of(error);
@@ -21,7 +21,7 @@ public class ErrorEntity {
         this.path = path;
     }
 
-    public ErrorEntity(final int status, final List<String> errors, final String message, final String path) {
+    public ErrorEntity(int status, List<String> errors, String message, String path) {
         this.timestamp = LocalDateTime.now();
         this.status = status;
         this.errors = errors;

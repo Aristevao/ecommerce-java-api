@@ -1,9 +1,9 @@
 package com.mentoring.ecommerce.adapter.out.persistence.postgresql.product;
 
 import com.mentoring.common.annotaion.PersistenceAdapter;
-import com.mentoring.ecommerce.application.port.out.DeleteProductPort;
-import com.mentoring.ecommerce.application.port.out.FindProductPort;
-import com.mentoring.ecommerce.application.port.out.SaveProductPort;
+import com.mentoring.ecommerce.application.port.out.product.DeleteProductPort;
+import com.mentoring.ecommerce.application.port.out.product.FindProductPort;
+import com.mentoring.ecommerce.application.port.out.product.SaveProductPort;
 import com.mentoring.ecommerce.domain.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

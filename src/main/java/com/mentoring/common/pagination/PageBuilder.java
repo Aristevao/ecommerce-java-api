@@ -10,27 +10,27 @@ import java.util.Objects;
 
 public class PageBuilder {
 
-    public static final int DEFAULT_PAGE_SIZE = 10;
-    private static final String DEFAULT_SORT_ATTRIBUTE = "id";
+    public static int DEFAULT_PAGE_SIZE = 10;
+    private static String DEFAULT_SORT_ATTRIBUTE = "id";
 
     private int page = 0;
     private int size = DEFAULT_PAGE_SIZE;
     private Sort sort;
 
-    public PageBuilder setPage(final int page) {
+    public PageBuilder setPage(int page) {
         this.page = page;
         return this;
     }
 
-    public PageBuilder setSize(final Integer size) {
+    public PageBuilder setSize(Integer size) {
         this.size = Objects.requireNonNullElse(size, DEFAULT_PAGE_SIZE);
         return this;
     }
 
-    public PageBuilder setSortByMultipleParams(final String sortBy, final String order) {
-        final String[] sorters = sortBy.split(",");
-        final String[] orders = order.split(",");
-        final List<Sort.Order> ordersToSort = new ArrayList<>();
+    public PageBuilder setSortByMultipleParams(String sortBy, String order) {
+        String[] sorters = sortBy.split(",");
+        String[] orders = order.split(",");
+        List<Sort.Order> ordersToSort = new ArrayList<>();
 
         int index = 0;
         for (String s : sorters) {
@@ -46,7 +46,7 @@ public class PageBuilder {
         return this;
     }
 
-    public PageBuilder setSortBy(final String sortBy, final String order) {
+    public PageBuilder setSortBy(String sortBy, String order) {
         if (order != null && (order.equals("asc")))
             this.sort = Sort.by(sortBy).ascending();
         else

@@ -1,0 +1,49 @@
+server:
+  port: 9001
+
+spring:
+  mvc:
+    throw-exception-if-no-handler-found: true
+  resources:
+    add-mappings: false
+  cache:
+    cache-names:
+      - rate-limit-buckets
+    caffeine:
+      spec: maximumSize=100000,expireAfterAccess=3600s
+
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:h2:mem:ecommerce;DB_CLOSE_DELAY=-1
+    username: sa
+    password: password
+
+  jpa:
+    defer-datasource-initialization: true
+
+  h2:
+    console:
+      enabled: true
+
+s3:
+  bucket-name: product-photo-bkt
+
+bucket4j:
+  enabled: true
+  filters:
+    - cache-name: rate-limit-buckets
+      url: /api/users
+      http-response-body: "{ \"status\": 429, \"error\": \"Too Many Requests\", \"message\": \"You have exhausted your API Request Quota\" }"
+      rate-limits:
+        - expression: "getHeader('api-key')"
+          execute-condition: "getHeader('api-key').startsWith('USER-')"
+          bandwidths:
+            - capacity: 3
+              time: 2
+              unit: minutes
+        - expression: "getHeader('api-key')"
+          bandwidths:
+            - capacity: 5
+              time: 1
+              unit: hours

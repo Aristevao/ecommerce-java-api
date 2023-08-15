@@ -25,7 +25,7 @@ public class ProductFindServiceAspect {
     }
 
     @Before("execution(* " + POINTCUT_PATH + ".findById(..))")
-    public void logFindProductByIdSuccess(final JoinPoint joinPoint) {
+    public void logFindProductByIdSuccess(JoinPoint joinPoint) {
         Object[] args = joinPoint.getArgs();
         log.info("Retrieving product {}", args[0]);
     }
